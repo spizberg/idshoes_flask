@@ -40,4 +40,4 @@ def testing(class_type,model):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
