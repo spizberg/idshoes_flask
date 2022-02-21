@@ -1,8 +1,7 @@
-FROM pytorch/pytorch
-RUN mkdir /workspace/app
-WORKDIR /workspace/app
-RUN apt-get update && apt-get install -y python3-opencv gcc
-EXPOSE 8000
+FROM python:3.8-slim
+RUN mkdir /app
+WORKDIR /app
+EXPOSE 5000
 COPY . .
 RUN pip install -r requirements.txt
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app", "--reload"]
+CMD ["python", "app.py"]
