@@ -1,7 +1,7 @@
-import json
+# import json
 from commons import get_model, transform_image_yolo
 
-idshoes_class = json.load(open('idshoes_class.json'))
+# idshoes_class = json.load(open('idshoes_class.json'))
 
 def get_prediction(image_bytes, model_ins, model_name, conf=None, iou=None):
     #try:
@@ -14,18 +14,16 @@ def get_prediction(image_bytes, model_ins, model_name, conf=None, iou=None):
     outputs = model(image)
     #except Exception:
     #    return 0, 'error'
-    predicted_idx = None
+    class_name = None
     probability = None
+    pandas_pred = outputs.pandas().xywhn[0]
 
-    if outputs.xyxy[0].shape[0]!=0:
-        max_conf_idx = int(outputs.xyxy[0][outputs.xyxy[0].max(0)[1][4].item()][5].item())
-        predicted_idx = str(max_conf_idx)
-        probability = outputs.xyxy[0].max(0)[0][4].item()
+    if pandas_pred.empty == False:
+        probability, class_name = pandas_pred.loc[0, ["confidence", "name"]].tolist()
     else:
-        probability = 0
-        predicted_idx = str(25)
+        probability, class_name = 0, "AUCUNE"
         
-    return idshoes_class[predicted_idx], probability
+    return class_name, probability
 
 def load_model(model_name="yolov5s"):
     return get_model(model_name)

@@ -7,7 +7,7 @@ import numpy as np
 def get_model(model_name,conf=None,iou=None):
     model = None
     if model_name[0] == "y":
-        model = torch.hub.load('ultralytics/yolov5', "custom", path="models/par_modele/yolov5x/best.pt", force_reload=True)
+        model = torch.hub.load('ultralytics/yolov5', "custom", path="models/par_modele/yolov5x/best_nano.pt")
         if conf:
             model.conf = conf
         if iou:
