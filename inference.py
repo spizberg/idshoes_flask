@@ -3,7 +3,7 @@ from commons import get_model, transform_image_yolo
 
 # idshoes_class = json.load(open('idshoes_class.json'))
 
-def get_prediction(image_bytes, model_ins, model_name, conf=None, iou=None):
+def get_prediction(image_bytes, model_ins, conf=None, iou=None):
     #try:
     model = model_ins
     image = transform_image_yolo(image_bytes=image_bytes)
@@ -19,9 +19,10 @@ def get_prediction(image_bytes, model_ins, model_name, conf=None, iou=None):
     pandas_pred = outputs.pandas().xywhn[0]
 
     if pandas_pred.empty == False:
-        probability, class_name = pandas_pred.loc[0, ["confidence", "name"]].tolist()
+        probability = pandas_pred.loc[0, "confidence"]
+        class_name = "chaussure"
     else:
-        probability, class_name = 0, "AUCUNE"
+        probability, class_name = 0, "aucune"
         
     return class_name, probability
 

@@ -34,7 +34,7 @@ def testing(class_type,model):
         if not file:
             return
         img_bytes = file.read()
-        class_name, probability = get_prediction(image_bytes=img_bytes, model_ins=model_ins, model_name=model, conf=conf, iou=iou)
+        class_name, probability = get_prediction(image_bytes=img_bytes, model_ins=model_ins, conf=conf, iou=iou)
         return render_template('result.html', class_name=class_name, proba=probability*100)
     return render_template('testing.html', model_name=model)
 
