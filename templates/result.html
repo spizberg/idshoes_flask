@@ -24,7 +24,7 @@
     <form class="form-signin-new" method=post enctype=multipart/form-data>
         <img class="mb-4" src="/static/bot.png" alt="" width="72">
         <h1 class="h3 mb-3 font-weight-normal">Prediction</h1>
-        {% if class_name!="AUCUNE" %}
+        {% if class_name!="aucune" %}
         <h5 class="h5 mb-3 font-weight-normal">Je détecte une {{class_name}} à {{proba|int}}%.</h5>
         {% else %}
         <h5 class="h5 mb-3 font-weight-normal">Je ne reconnais pas cette chaussure.</h5>
