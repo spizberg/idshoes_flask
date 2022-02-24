@@ -19,8 +19,8 @@ def get_prediction(image_bytes, model_ins, conf=None, iou=None):
     pandas_pred = outputs.pandas().xywhn[0]
 
     if pandas_pred.empty == False:
-        probability = pandas_pred.loc[0, "confidence"]
-        class_name = "chaussure"
+        probability, class_name = pandas_pred.loc[0, ["confidence", "name"]]
+        class_name = "aucune" if class_name=="UNKNOWN" else class_name.lower()
     else:
         probability, class_name = 0, "aucune"
         
