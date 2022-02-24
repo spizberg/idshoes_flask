@@ -20,7 +20,7 @@ def get_prediction(image_bytes, model_ins, conf=None, iou=None):
 
     if pandas_pred.empty == False:
         probability, class_name = pandas_pred.loc[0, ["confidence", "name"]]
-        class_name = "aucune" if class_name=="UNKNOWN" else class_name.lower()
+        class_name = "aucune" if class_name=="UNKNOWN" else class_name[:-2].lower()
     else:
         probability, class_name = 0, "aucune"
         
