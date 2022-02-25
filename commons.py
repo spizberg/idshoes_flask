@@ -4,15 +4,9 @@ import torch
 import numpy as np
 
 
-def get_model(model_name,conf=None,iou=None):
-    model = None
-    if model_name[0] == "y":
-        model = torch.hub.load('ultralytics/yolov5', "custom", path="models/par_modele/yolov5x/best.pt")
-        model.conf = 0.5
-        if conf:
-            model.conf = conf
-        if iou:
-            model.iou = iou
+def get_model():
+    model = torch.hub.load('ultralytics/yolov5', "custom", path="models/best.pt")
+    model.conf = 0.5
     model.eval()
     return model
 

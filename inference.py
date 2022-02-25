@@ -26,5 +26,3 @@ def get_prediction(image_bytes, model_ins, conf=None, iou=None):
         
     return class_name, probability
 
-def load_model(model_name="yolov5s"):
-    return get_model(model_name)
